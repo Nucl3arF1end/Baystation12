@@ -5,7 +5,7 @@ ENV PATH=/root/cargo/bin:/root/rustup/bin:$PATH\
 	CARGO_HOME=/root/cargo\
 	RUSTUP_HOME=/root/rustup
 
-RUN apt-get update && apt-get install -y curl git gcc-multilib;\
+RUN apt-get update && apt-get install -y curl git gcc-multilib apt-utils;\
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o rustup-init; \
 	chmod +x rustup-init; \
 	./rustup-init -y --no-modify-path;\
@@ -19,7 +19,7 @@ RUN mkdir to_copy;\
 	cargo build --release --target i686-unknown-linux-gnu;\
 	mv -t to_copy target/i686-unknown-linux-gnu/release/libbyhttp.so || true
 
-FROM xales/byond:512-latest
+FROM tgstation/byond:latest
 
 ARG BUILD_ARGS
 ENV RUNAS=root
