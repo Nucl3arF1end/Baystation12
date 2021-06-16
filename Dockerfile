@@ -1,4 +1,4 @@
-FROM xales/byond:512-latest
+FROM tgstation/byond:latest
 
 
 ENV PATH=/root/cargo/bin:/root/rustup/bin:$PATH\
@@ -30,6 +30,9 @@ COPY --from=0 /byhttp/to_copy /bs12/lib
 WORKDIR /bs12
 RUN apt-get update && apt-get install -y gosu
 RUN scripts/dm.sh $BUILD_ARGS baystation12.dme
+#RUN mkdir /byond; \
+#	chown -R $RUNAS:$RUNAS /byond /bs12 baystation12.rsc; \
+#	DreamDaemon baystation12.dmb 8000 -trusted -verbose
 
 EXPOSE 8000
 VOLUME /bs12/data
